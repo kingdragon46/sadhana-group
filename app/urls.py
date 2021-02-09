@@ -9,7 +9,10 @@ from app import views
 urlpatterns = [
 
     # The home page
-    path('', views.index, name='home'),
+    path('', views.home, name='home'),
+
+    # The index page
+    path('index/', views.index, name='index'),
 
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),
