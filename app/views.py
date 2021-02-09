@@ -18,7 +18,7 @@ def home(request):
     return HttpResponse(html_template.render(context, request))
 
 
-@login_required(login_url="/login/")
+# @login_required(login_url="/login/")
 def index(request):
     
     context = {}
@@ -27,7 +27,7 @@ def index(request):
     html_template = loader.get_template( 'index.html' )
     return HttpResponse(html_template.render(context, request))
 
-@login_required(login_url="/login/")
+# @login_required(login_url="/login/")
 def pages(request):
     context = {}
     # All resource paths end in .html.
