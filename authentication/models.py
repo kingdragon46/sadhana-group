@@ -17,7 +17,7 @@ import requests
 
 class UserManager(BaseUserManager):
    
-    def create_user(self, email, password, **extra_fields):
+    def create_user(self, email, **extra_fields):
         """
         Create and save a User with the given email and password.
         """
@@ -25,7 +25,7 @@ class UserManager(BaseUserManager):
             raise ValueError('The Email must be set')
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
-        user.set_password(password)
+        user.set_password(User.objects.make_random_password())
         user.save()
         return user
 
@@ -45,6 +45,7 @@ class UserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 class User(AbstractUser):
+    
     
     phone_regex = RegexValidator( regex = r'^\+?1?\d{9,10}$', message ="Phone number must be entered in the format +919999999999. Up to 10 digits allowed.")
     phone       = models.CharField('Phone',validators =[phone_regex], max_length=10, unique = True,null=True)

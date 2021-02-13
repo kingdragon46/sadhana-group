@@ -10598,3 +10598,7 @@ div.code-toolbar > .toolbar span:hover {
 		box-shadow: 0 0 0 0 rgba(4, 169, 245, 0)
 	}
 }
+
+input[type=text], [type=email],[type=number]{
+  background-color: white;
+}

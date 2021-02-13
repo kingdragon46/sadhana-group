@@ -10,20 +10,156 @@ from .models import *
 from authentication.models import *
 from authentication.forms import SignUpForm
 
+
+# --------------------------Customer related----------------------------
 class CustomerForm(UserCreationForm):
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Name",                
+                "class": "form-control"
+            }
+        ))
+    
+    email = forms.CharField(
+        widget=forms.EmailInput(
+            attrs={
+                "placeholder" : "Email",                
+                "class": "form-control"
+            }
+        ))
+    phone = forms.CharField(
+        widget=forms.NumberInput(
+            attrs={
+                "placeholder" : "Phone Number",                
+                "class": "form-control"
+            }
+        ))
+    addressline1 = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Address Line1",                
+                "class": "form-control"
+            }
+        ))
+    addressline2 = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Address Line2",                
+                "class": "form-control"
+            }
+        ))
+    city = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "City",                
+                "class": "form-control"
+            }
+        ))
+    pincode = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Pincode",                
+                "class": "form-control"
+            }
+        ))
+    # is_staff = forms.BooleanField(initial=False)
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['username', 'email', 'phone', 'addressline1', 'addressline2', 'city', 'pincode', 'is_active']
         exclude = ['password','user', 'groups', 'user_permissions', 'is_superuser', 'last_login', 'is_staff', 'date_joined']
 
 Customerformset = inlineformset_factory(User, Customer, 
-    fields=('Account_Number', 'STB_Number', 'Area_Name', 'NODE_Number', 'Bank_Account', 'IFSC_code'), extra=1, 
+    fields=('Account_Number', 'STB_Number', 'Area_Name', 'NODE_Number', 'Bank_Account', 'IFSC_code', 'is_active'), extra=1, 
     can_delete=False) 
 
-# class CustomerForm2(UserCreationForm):
-#     class Meta:
-#         model = Customer
-#         fields = '__all__'
-#         exclude = ['password', 'groups', 'user_permissions', 'is_superuser', 'last_login', 'is_staff', 'date_joined']
+
+# --------------------------Operator related-----------------------------------------
+class OperatorForm(UserCreationForm):
+    
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Name",                
+                "class": "form-control"
+            }
+        ))
+
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder" : "Password1",                
+                "class": "d-none"
+            }
+        ))
+
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder" : "Password2",                
+                "class": "d-none"
+            }
+        ))
+    
+    email = forms.CharField(
+        widget=forms.EmailInput(
+            attrs={
+                "placeholder" : "Email",                
+                "class": "form-control"
+            }
+        ))
+    phone = forms.CharField(
+        widget=forms.NumberInput(
+            attrs={
+                "placeholder" : "Phone Number",                
+                "class": "form-control"
+            }
+        ))
+    addressline1 = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Address Line1",                
+                "class": "form-control"
+            }
+        ))
+    addressline2 = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Address Line2",                
+                "class": "form-control"
+            }
+        ))
+    city = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "City",                
+                "class": "form-control"
+            }
+        ))
+    pincode = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Pincode",                
+                "class": "form-control"
+            }
+        ))
+    
+    is_staff = forms.BooleanField(initial=True)
+    
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'phone', 'addressline1', 'addressline2', 'city', 'pincode', 'is_active', 'is_staff' ]
+        
+        
+        # exclude = ['password', 'password1', 'password2','user', 'groups', 'user_permissions', 'is_superuser', 'last_login', 'is_staff', 'date_joined']
+
+Operatorformset = inlineformset_factory(User, Operator, 
+    fields=('Area', 'Pan_Number', 'Bank_Account', 'IFSC_code'), extra=1, 
+    can_delete=False) 
+
+
+
+
 
         

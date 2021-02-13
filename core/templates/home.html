@@ -71,7 +71,13 @@
                         <li><a href="#quickPay" class="btn btn-lg btn-warning btn-rounded"
                                 style="background: linear-gradient(to right, #e85f17, #f89337)"><i
                                     class="icofont-pay"></i>Quick Pay</a></li>
-                        <li><a href="{% url 'index' %}" target="_blank">Login<i class="icofont-login"></i></a></li>
+                        <li class="drop-down"><a href="#">Login<i class="icofont-login"></i></a>
+                            <ul>
+                              <li><a href="{% url 'loginCustomer' %}" target="_blank">Customer</a></li>
+                              <li><a href="{% url 'index' %}" target="_blank">Operator</a></li>
+                            </ul>
+                        </li>
+                        
                         <!-- <li><a href="#portfolio">Portfolio</a></li>
             <li><a href="#team">Team</a></li>
             <li><a href="#pricing">Pricing</a></li>

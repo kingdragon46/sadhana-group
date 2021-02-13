@@ -1,21 +1,23 @@
 
     <nav class="pcoded-navbar">
         <div class="navbar-wrapper">
-            <div class="navbar-brand header-logo">
-                <a target="_blank" 
-                   href="https://technovalty.com" class="b-brand">
-                    <div class="b-bg">
-                        <i class="feather icon-trending-up"></i>
-                    </div>
+            <div class="navbar-brand header-logo d-block text-left" style="height:100px;">
+                
+                    <div class="logo scrollto mb-1">
+                        <img src="/static/assets/img/Logo/logo2.png" alt=""
+                        class="img-fluid" style="height:46px;"><br>
+                    </div> 
+                    <div class="b-brand d-block">
                     <span class="b-title">Hello, {{request.user}}</span>
-                </a>
+                    <a href="{% url 'logout' %}" class="float-right"><i class="feather icon-power"></i>
+                    </a>
+                    </div>
+                
                 <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
             </div>
             <div class="navbar-content scroll-div">
                 <ul class="nav pcoded-inner-navbar">
-                    <li class="nav-item pcoded-menu-caption">
-                        <label>Navigation</label>
-                    </li>
+    
                     <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" 
                         class="nav-item {% if 'index' in segment %} active {% endif %}">
                         <a href="/index/" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
@@ -28,7 +30,8 @@
                         <ul class="pcoded-submenu">
                             <li class=""><a href="/ui-button.html" class="">Button</a></li>
                             <li class=""><a href="/ui-badges.html" class="">Badges</a></li>
-                            <li class=""><a href="{% url 'users' %}" class="">Breadcrumb & paggination</a></li>
+                            <li class=""><a href="{% url 'users' %}" class="">Customers</a></li>
+                            <li class=""><a href="{% url 'operators' %}" class="">Operators</a></li>
                             <li class=""><a href="/ui-collapse.html" class="">Collapse</a></li>
                             <li class=""><a href="/ui-tabs.html" class="">Tabs & pills</a></li>
                             <li class=""><a href="/ui-typography.html" class="">Typography</a></li>

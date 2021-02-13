@@ -34,22 +34,28 @@
                 <!-- [ Main Content ] start -->
                 <form role="form" action="" method="POST">
                     {% csrf_token %}
-
+                   
                     <div class="form-control">
-                        {{form.as_p}}
-                    </div>
+                        {{form}}
 
                     {{ form2.management_form }}
 
                     <div class="form-control">
                         {% for form in form2 %}
-                            {{form.as_p}}
-                            
-                        {% endfor %}
+                          <label class="mr-2">Area {{ form.Area | addclass:'form-control' }}</label>
+                          
+                          <label class="mr-2">Pan Number {{ form.Pan_Number | addclass:'form-control' }}</label>
+                          
+                          <label class="mr-2">Bank_Account {{ form.Bank_Account | addclass:'form-control' }}</label>
+                          
+                          <label class="mr-2">NODE Number {{ form.IFSC_code | addclass:'form-control' }}</label>
+                          
 
+                        {% endfor %} 
+                        
                     </div>
-
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    
+                    <button type="submit" class="btn btn-primary">Create Operator</button>
                 </form>
 
                 <!-- [ Main Content ] end -->

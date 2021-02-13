@@ -63,18 +63,14 @@ def users(request):
     html_template = loader.get_template( 'ui-breadcrumb-pagination.html' )
     return HttpResponse(html_template.render(context, request))
 
-# def user_edit(request, id=None):  
-#     instance = get_object_or_404(User, id=id)
-#     form = SignUpForm(instance=student)
-#     print(form)
+def operators(request):
+    users = User.objects.all().filter(is_staff=True, is_superuser=False)
+    print(users)
+    context = {'users':users}
+    html_template = loader.get_template( 'operator.html' )
+    return HttpResponse(html_template.render(context, request))
 
-#     if request.method == 'POST':
-#         form = SignUpForm(request.POST, request.FILES, instance=user)       
-#         if form.is_valid():
-#             form.save()
-            
-#     html_template = loader.get_template( 'user_update.html' )
-#     return HttpResponse(html_template.render(context, request))
+
 
 def testing(request):
     print(request.user)
@@ -107,6 +103,8 @@ def newCustomer(request):
                 form2 = Customerformset(request.POST, instance=form)
                 if form2.is_valid:
                    form2.save()
+                   return redirect('users')
+                   
                 # username = form.cleaned_data.get('username')
                 
                 messages.success(request, 'Account is created for ' + username)
@@ -123,3 +121,54 @@ def newCustomer(request):
     html_template = loader.get_template( 'accounts/newCustomer.html')
     return HttpResponse(html_template.render(context, request))
 
+def newOperator(request):
+    msg     = None
+    success = False
+    try:
+        form = OperatorForm()
+        form2 = Operatorformset()
+        if request.method == 'POST':
+            # request.POST.password1 = 'raghav123@'
+            # request.POST.password2 = 'raghav123@'
+            print(request.POST.password1)
+            
+            form = OperatorForm(request.POST)
+            if form.is_valid():
+                form = form.save()
+                form2 = Operatorformset(request.POST, instance=form)
+                if form2.is_valid:
+                   form2.save()
+                   return redirect('operators')
+                # username = form.cleaned_data.get('username')
+                
+                messages.success(request, 'Account is created for ' + username)
+                
+            else:
+                msg = 'Form is not valid'    
+        else:
+            form = OperatorForm()
+            form2 = Operatorformset(instance=user)
+    except Exception as e:
+        print (e)
+    context = {"form": form, "form2": form2, "msg" : msg, "success" : success }
+
+    html_template = loader.get_template( 'accounts/newOperator.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+# --------------------------------------Customer Views----------------------------------------------
+
+def customerHome(request):
+
+    context={}
+
+    html_template = loader.get_template( 'accounts/customer_home.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+def customerTickets(request):
+
+    context={}
+
+    html_template = loader.get_template( 'tickets.html')
+    return HttpResponse(html_template.render(context, request))
