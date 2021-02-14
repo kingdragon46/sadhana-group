@@ -15,6 +15,7 @@ urlpatterns = [
     # for admin and operators only
     path('index/users/', views.users, name="users"),
     path('index/operators/', views.operators, name="operators"),
+    path('createPlans/', views.createPlans, name="createPlans"),
 
     path('testing/', views.testing, name='testing'),
 

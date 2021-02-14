@@ -35,3 +35,15 @@ class Customer(models.Model):
 
     def __str__(self):
         return f'{self.user}'
+
+
+class createPlans(models.Model):
+    Name = models.CharField(null= True, max_length=50)
+    Plan_ID = models.CharField(null= True, max_length=50)
+    validity = models.CharField(null= True, max_length=50)
+    price = models.CharField(null= True, max_length=50)
+    company_name = models.CharField(null= True, max_length=50)
+    description = models.CharField(null= True, max_length=50)
+    speed = models.CharField(null= True, max_length=50)
+    data_limit = models.CharField(null= True, max_length=50)
+

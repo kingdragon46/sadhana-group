@@ -36,21 +36,32 @@
                     {% csrf_token %}
                    
                     <div class="form-control">
-                        {{form}}
+                        <h4>Basic Details</h4>
+                        <div class="row">
+                            {% for f in form %}
+                            <div class="col-md-6 my-2">
+                                {{f}}
+                            </div>
+                            {% endfor %}
+                            
+                        </div>
+                        
+                    </div>
 
                     {{ form2.management_form }}
 
-                    <div class="form-control">
+                    <div class="form-control my-4">
+                        <h4>Account Details</h4>
                         {% for form in form2 %}
+
                           <label class="mr-2">Area {{ form.Area | addclass:'form-control' }}</label>
                           
                           <label class="mr-2">Pan Number {{ form.Pan_Number | addclass:'form-control' }}</label>
                           
-                          <label class="mr-2">Bank_Account {{ form.Bank_Account | addclass:'form-control' }}</label>
+                          <label class="mr-2">Bank Account {{ form.Bank_Account | addclass:'form-control' }}</label>
                           
-                          <label class="mr-2">NODE Number {{ form.IFSC_code | addclass:'form-control' }}</label>
+                          <label class="mr-2">NODE Number {{ form.IFSC_code | addclass:'form-control' }}</label> 
                           
-
                         {% endfor %} 
                         
                     </div>

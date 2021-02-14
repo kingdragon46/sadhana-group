@@ -55,6 +55,7 @@ def pages(request):
         return HttpResponse(html_template.render(context, request))
 
 
+# ----------------------------------------------Admin & Operator views------------------------------------------------------------
 
 def users(request):
     users = User.objects.all().filter(is_staff=False)
@@ -103,10 +104,7 @@ def newCustomer(request):
                 form2 = Customerformset(request.POST, instance=form)
                 if form2.is_valid:
                    form2.save()
-                   return redirect('users')
-                   
-                # username = form.cleaned_data.get('username')
-                
+                   return redirect('users')              
                 messages.success(request, 'Account is created for ' + username)
                 
             else:
@@ -128,19 +126,19 @@ def newOperator(request):
         form = OperatorForm()
         form2 = Operatorformset()
         if request.method == 'POST':
-            # request.POST.password1 = 'raghav123@'
-            # request.POST.password2 = 'raghav123@'
-            print(request.POST.password1)
+            
+            print(request.POST)
             
             form = OperatorForm(request.POST)
+            # print(form)
             if form.is_valid():
                 form = form.save()
+                print(form)               
                 form2 = Operatorformset(request.POST, instance=form)
                 if form2.is_valid:
                    form2.save()
+                   print(form2)
                    return redirect('operators')
-                # username = form.cleaned_data.get('username')
-                
                 messages.success(request, 'Account is created for ' + username)
                 
             else:
@@ -155,6 +153,22 @@ def newOperator(request):
     html_template = loader.get_template( 'accounts/newOperator.html')
     return HttpResponse(html_template.render(context, request))
 
+
+def createPlans(request):
+    try: 
+        if request.method == 'GET':
+            form = CreatePlansForm()
+        else:
+            form = CreatePlansForm(request.POST)
+            if form.is_valid():
+                form.save()
+            else:
+                    msg = 'Form is not valid'         
+    except Exception as e:
+        print (e)
+    context = {"form":form}
+    html_template = loader.get_template( 'createPlans.html')
+    return HttpResponse(html_template.render(context, request))
 
 # --------------------------------------Customer Views----------------------------------------------
 

@@ -20,6 +20,22 @@ class CustomerForm(UserCreationForm):
                 "class": "form-control"
             }
         ))
+
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder" : "Password1",                
+                "class": "form-control"
+            }
+        ))
+
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder" : "Password2",                
+                "class": "form-control"
+            }
+        ))
     
     email = forms.CharField(
         widget=forms.EmailInput(
@@ -66,8 +82,8 @@ class CustomerForm(UserCreationForm):
     # is_staff = forms.BooleanField(initial=False)
     class Meta:
         model = User
-        fields = ['username', 'email', 'phone', 'addressline1', 'addressline2', 'city', 'pincode', 'is_active']
-        exclude = ['password','user', 'groups', 'user_permissions', 'is_superuser', 'last_login', 'is_staff', 'date_joined']
+        fields = ['username', 'email', 'password1', 'password2', 'phone', 'addressline1', 'addressline2', 'city', 'pincode', 'is_active']
+        exclude = ['user', 'groups', 'user_permissions', 'is_superuser', 'last_login', 'is_staff', 'date_joined']
 
 Customerformset = inlineformset_factory(User, Customer, 
     fields=('Account_Number', 'STB_Number', 'Area_Name', 'NODE_Number', 'Bank_Account', 'IFSC_code', 'is_active'), extra=1, 
@@ -85,21 +101,6 @@ class OperatorForm(UserCreationForm):
             }
         ))
 
-    password1 = forms.CharField(
-        widget=forms.PasswordInput(
-            attrs={
-                "placeholder" : "Password1",                
-                "class": "d-none"
-            }
-        ))
-
-    password2 = forms.CharField(
-        widget=forms.PasswordInput(
-            attrs={
-                "placeholder" : "Password2",                
-                "class": "d-none"
-            }
-        ))
     
     email = forms.CharField(
         widget=forms.EmailInput(
@@ -145,11 +146,27 @@ class OperatorForm(UserCreationForm):
         ))
     
     is_staff = forms.BooleanField(initial=True)
+    password1 = forms.CharField(widget=forms.PasswordInput(
+            attrs={
+                "placeholder" : "Password1",                
+                "class": "form-control",
+                "value": "admin123@@",
+                "disabled": True
+            }
+        ))
+    password2 = forms.CharField(widget=forms.PasswordInput(
+            attrs={
+                "placeholder" : "Password2",                
+                "class": "form-control",
+                "value": "admin123@@",
+                "disabled": True
+            }
+        ))
     
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'phone', 'addressline1', 'addressline2', 'city', 'pincode', 'is_active', 'is_staff' ]
+        fields = ['username', 'email', 'password1', 'password2',  'phone', 'addressline1', 'addressline2', 'city', 'pincode', 'is_active', 'is_staff' ]
         
         
         # exclude = ['password', 'password1', 'password2','user', 'groups', 'user_permissions', 'is_superuser', 'last_login', 'is_staff', 'date_joined']
@@ -160,6 +177,76 @@ Operatorformset = inlineformset_factory(User, Operator,
 
 
 
+class CreatePlansForm(ModelForm):
+    Name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Plan Name",                
+                "class": "form-control"
+            }
+        ))
+    
+    Plan_ID = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Plan ID",                
+                "class": "form-control"
+            }
+        ))
+    
+    validity = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Validity",                
+                "class": "form-control"
+            }
+        ))
 
+    price = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Price ₹",                
+                "class": "form-control"
+            }
+        ))
 
+    company_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Company Name",                
+                "class": "form-control"
+            }
+        ))
+
+    description = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Description",                
+                "class": "form-control"
+            }
+        ))
+
+    speed = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Speed Line1",                
+                "class": "form-control"
+            }
+        ))
+
+    data_limit = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Data Limit",                
+                "class": "form-control"
+            }
+        ))
+
+    class Meta:
+        model = createPlans
+        fields = '__all__'
         
+class ContactForm(forms.Form):
+    from_email = forms.EmailField(required=True)
+    subject = forms.CharField(required=True)
+    message = forms.CharField(widget=forms.Textarea, required=True)
