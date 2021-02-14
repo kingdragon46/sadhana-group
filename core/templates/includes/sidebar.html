@@ -28,20 +28,31 @@
                     <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds" class="nav-item pcoded-hasmenu">
                         <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Components</span></a>
                         <ul class="pcoded-submenu">
-                            {% comment %} <li class=""><a href="/ui-button.html" class="">Button</a></li>
-                            <li class=""><a href="/ui-badges.html" class="">Badges</a></li> {% endcomment %}
                             <li class=""><a href="{% url 'users' %}" class="">Customers</a></li>
                             <li class=""><a href="{% url 'operators' %}" class="">Operators</a></li>
-                            {% comment %} <li class=""><a href="/ui-collapse.html" class="">Collapse</a></li>
-                            <li class=""><a href="/ui-tabs.html" class="">Tabs & pills</a></li>
-                            <li class=""><a href="/ui-typography.html" class="">Typography</a></li>
-                            <li class=""><a href="/ui-icons.html" class="">Feather<span class="pcoded-badge label label-danger">NEW</span></a></li> {% endcomment %}
+                            <li class=""><a href="#" class="">STB Details
+</a></li>
+                            <li class=""><a href="#" class="">Payment Details
+</a></li>
+                            <li class=""><a href="#" class="">Service Request Details
+</a></li>
+                            <li class=""><a href="#" class="">Employees Details
+</a></li>
+                            <li class=""><a href="#" class="">Inventory Details
+</a></li>
+                            <li class=""><a href="#" class="">Feedback Details
+</a></li>
+                            <li class=""><a href="{% url 'createPlans' %}" class="">Package Details
+</a></li>
+                            <li class=""><a href="#" class="">Node Details
+</a></li>                          
                         </ul>
                     </li>
+                    {% comment %}
                     <li data-username="Sample Page" 
                         class="nav-item {% if 'page-blank' in segment %} active {% endif %}">
                         <a href="{% url 'createPlans' %}" class="nav-link"><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Plans</span></a></li>
-                    {% comment %} <li data-username="Sample Page" class="nav-item"><a href="/page-404.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Error 404</span></a></li>
+                     <li data-username="Sample Page" class="nav-item"><a href="/page-404.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Error 404</span></a></li>
                     <li class="nav-item pcoded-menu-caption">
                         <label>Forms & table</label>
                     </li>
