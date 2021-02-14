@@ -146,6 +146,8 @@ class OperatorForm(UserCreationForm):
         ))
     
     is_staff = forms.BooleanField(initial=True)
+    is_active = forms.BooleanField(initial=True)
+
     password1 = forms.CharField(widget=forms.PasswordInput(
             attrs={
                 "placeholder" : "Password1",                
