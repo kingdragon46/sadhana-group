@@ -173,8 +173,11 @@ def createPlans(request):
 # --------------------------------------Customer Views----------------------------------------------
 
 def customerHome(request):
-
-    context={}
+    cust = request.user
+    
+    users = Customer.objects.all().filter(user=cust)
+    print(cust.phone)
+    context={"cust":cust, "users":users}
 
     html_template = loader.get_template( 'accounts/customer_home.html')
     return HttpResponse(html_template.render(context, request))

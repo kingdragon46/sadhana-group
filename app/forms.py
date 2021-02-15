@@ -151,17 +151,17 @@ class OperatorForm(UserCreationForm):
     password1 = forms.CharField(widget=forms.PasswordInput(
             attrs={
                 "placeholder" : "Password1",                
-                "class": "form-control",
-                "value": "admin123@@",
-                "disabled": True
+                "class": "form-control"
+                
+                
             }
         ))
     password2 = forms.CharField(widget=forms.PasswordInput(
             attrs={
                 "placeholder" : "Password2",                
-                "class": "form-control",
-                "value": "admin123@@",
-                "disabled": True
+                "class": "form-control"
+                
+                
             }
         ))
     

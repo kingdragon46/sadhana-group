@@ -47,6 +47,7 @@ def register_user(request):
             username = form.cleaned_data.get('username')
             
             messages.success(request, 'Account is created for ' + username)
+            return redirect("loginCustomer/")
             
         else:
             msg = 'Form is not valid'    

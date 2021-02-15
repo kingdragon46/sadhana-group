@@ -16,10 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="canonical" href="https://appseed.us/admin-dashboards/django-dashboard-dattaable">
-    
-    <meta name="description" content="Datta Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
-    <meta name="keywords" content="admin templates, bootstrap admin templates, bootstrap 4, dashboard, dashboard templets, sass admin templets, html admin templates, responsive, bootstrap admin templates free download,premium bootstrap admin templates, datta able, datta able bootstrap admin template, free admin theme, free dashboard template"/>
-    <meta name="author" content="CodedThemes"/>
+
 
     <!-- Favicon icon -->
     <link rel="icon" href="/static/assets/images/favicon.ico" type="image/x-icon">
@@ -32,7 +29,6 @@
 
     <!-- Specific CSS goes HERE -->
     {% block stylesheets %}{% endblock stylesheets %}
-
 </head>
 
 <body>
@@ -53,7 +49,61 @@
     <div class="pcoded-main-container">
         <div class="pcoded-wrapper">
 
-            {% block content %}{% endblock content %}
+            {% block content %}
+                <h4>Hi {{user}}</h4>
+                <div class="form-control mx-3 col-md-11">
+                    <h4>Basic Details</h4>
+                    <div class="row">
+                        <div class="form-control col-md-3 mb-3 mx-3">
+                            {{cust.username}}
+                        </div>
+                        <div class="form-control col-md-3 mb-3 mr-3">
+                            {{cust.email}}
+                        </div>
+                        <div class="form-control col-md-3 mb-3 ">
+                            {{cust.phone}}
+                        </div>
+                        <div class="form-control col-md-3 mb-3 mx-3">
+                            {{cust.addressline1}}
+                        </div>
+                        <div class="form-control col-md-3 mb-3 mr-3">
+                            {{cust.addressline2}}
+                        </div>
+                        <div class="form-control col-md-3 mb-3">
+                            {{cust.city}}
+                        </div>
+                        <div class="form-control col-md-3 mb-3 mx-3">
+                            {{cust.pincode}}
+                        </div>
+                    </div>
+                    
+                    <br><h4>Account Details</h4>
+                   <div class="row">
+                        
+                        {% for user in users %}
+                            <div class="form-control col-md-3 mb-3 mx-3">
+                                {{user.Account_Number}}
+                            </div>
+                            <div class="form-control col-md-3 mb-3 mr-3">
+                                {{user.STB_Number}}
+                            </div>
+                            <div class="form-control col-md-3 mb-3">
+                                {{user.Area_Name}}
+                            </div>
+                            <div class="form-control col-md-3 mb-3 mx-3">
+                                {{user.NODE_Number}}
+                            </div>
+                            <div class="form-control col-md-3 mb-3 mr-3">
+                                {{user.Bank_Account}}
+                            </div>
+                            <div class="form-control col-md-3 mb-3">
+                                {{user.IFSC_code}}
+                            </div>
+                            
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endblock content %}
 
         </div>
     </div>
