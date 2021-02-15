@@ -15,7 +15,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Operators</h5>
+                            <h5 class="m-b-10">Breadcrumbs & Pagination</h5>
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
@@ -37,14 +37,14 @@
                         <div class="card">
                             <div class="card-header">
                                 <h5>Customers</h5>
-                                <a href="{% url 'newOperator' %}" role="button" style="float: right"><i class="fa fa-plus-circle" aria-hidden="true"></i>Add Operator</a>
+                                <a href="{% url 'newCustomer' %}" role="button" style="float: right"><i class="fa fa-plus-circle" aria-hidden="true"></i>Add Customer</a>
                             </div>
                             <div class="card-block table-border-style">
                                 <div class="table-responsive">
                                     <table class="text-center table table-bordered" id="tbleCust">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Operator</th>
+                                                <th scope="col">Customer</th>
                                                 <th scope="col">Email</th>
                                                 <th scope="col">Phone</th>
                                                 <th scope="col">Update</th>
@@ -54,17 +54,17 @@
                                         <tbody>
                                             {% for user in users %}
                                             <tr>
-                                                <td>{{user}}</td>
+                                                <td>{{user.username}}</td>
                                                 <td>{{user.email}}</td>
                                                 <td>{{user.phone}}</td>
                                                 <td>
                                                     <a class="btn btn-sm btn-info"
-                                                        href="{% url 'updateOperator' user.id %}"><i
+                                                        href="{% url 'updateCustomer' user.id %}"><i
                                                             class="fas fa-edit"></i></a>
                                                     <a class="btn btn-sm btn-danger"
                                                         href="#"><i class="fa fa-trash"
                                                             aria-hidden="true"></i></a>
-                                                </td>
+                                                </td> 
                                             </tr>
                                             {% endfor %}
                                         </tbody>

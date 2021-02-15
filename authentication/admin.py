@@ -22,7 +22,7 @@ class CustomUserAdmin(BaseUserAdmin):
     list_display = ('username','email','phone', 'is_staff', 'is_active',)
     list_filter = ('username','email','phone','is_staff', 'is_active',)
     fieldsets = (
-        (None, {'fields': ('email', 'password', 'phone')}),
+        (None, {'fields': ('username','email', 'password', 'phone')}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
         ('Address', {'fields': ('addressline1', 'addressline2', 'city', 'pincode')}),
     )

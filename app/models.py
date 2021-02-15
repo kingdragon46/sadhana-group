@@ -3,6 +3,8 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -21,7 +23,7 @@ class Operator(models.Model):
         return f'{self.user}'
     
 class Customer(models.Model):
-    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name='customer')
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 
     Account_Number = models.CharField(max_length=20, null=True)
     STB_Number = models.CharField(max_length=20, null=True)
@@ -47,3 +49,15 @@ class createPlans(models.Model):
     speed = models.CharField(null= True, max_length=50)
     data_limit = models.CharField(null= True, max_length=50)
 
+
+class Employee(models.Model):
+    SR_No = models.CharField(_("Serial Number"), null=True, max_length=50, unique=True)
+    Name = models.CharField(_("Name"), null=True, max_length=100)
+    Emp_Number = models.CharField(_("Employee Number"), null=True, max_length=10)
+    Mobile = RegexValidator( regex = r'^\+?1?\d{9,10}$', message ="Phone number must be entered in the format +919999999999. Up to 10 digits allowed.")
+    email = models.EmailField(_("Email"), max_length=254)
+    department = models.CharField(_("Department"), null=True, max_length=100)
+    DOJ = models.DateField(_("Date of Joining"), auto_now=False, auto_now_add=False)
+
+    def __str__(self):
+        return f'{self.Name}'

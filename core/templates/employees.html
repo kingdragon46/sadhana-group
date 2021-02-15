@@ -37,35 +37,33 @@
                         <div class="card">
                             <div class="card-header">
                                 <h5>Customers</h5>
-                                <a href="{% url 'newOperator' %}" role="button" style="float: right"><i class="fa fa-plus-circle" aria-hidden="true"></i>Add Operator</a>
+                                <a href="{% url 'addEmployees' %}" role="button" style="float: right"><i class="fa fa-plus-circle" aria-hidden="true"></i>Add Employee</a>
                             </div>
                             <div class="card-block table-border-style">
                                 <div class="table-responsive">
                                     <table class="text-center table table-bordered" id="tbleCust">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Operator</th>
+                                                <th scope="col">SR.No</th>
+                                                <th scope="col">Name </th>
+                                                <th scope="col">Emp Number</th>
+                                                <th scope="col">Mobile</th>
                                                 <th scope="col">Email</th>
-                                                <th scope="col">Phone</th>
-                                                <th scope="col">Update</th>
-                                                {% comment %} <th scope="col">Remove</th> {% endcomment %}
+                                                <th scope="col">Department</th>
+                                                <th scope="col">DOJ</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {% for user in users %}
                                             <tr>
-                                                <td>{{user}}</td>
+                                                <td>{{user.SR_No}}</td>
+                                                <td>{{user.Name}}</td>
+                                                <td>{{user.Emp_Number}}</td>
+                                                <td>{{user.Mobile}}</td>
                                                 <td>{{user.email}}</td>
-                                                <td>{{user.phone}}</td>
-                                                <td>
-                                                    <a class="btn btn-sm btn-info"
-                                                        href="{% url 'updateOperator' user.id %}"><i
-                                                            class="fas fa-edit"></i></a>
-                                                    <a class="btn btn-sm btn-danger"
-                                                        href="#"><i class="fa fa-trash"
-                                                            aria-hidden="true"></i></a>
-                                                </td>
-                                            </tr>
+                                                <td>{{user.department}}</td>
+                                                <td>{{user.DOJ}}</td>
+                                        
                                             {% endfor %}
                                         </tbody>
 

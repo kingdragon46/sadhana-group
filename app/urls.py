@@ -13,15 +13,22 @@ urlpatterns = [
     path('index/', views.index, name='index'),
 
     # for admin and operators only
-    path('index/users/', views.users, name="users"),
+    path('index/customers/', views.customers, name="customers"),
     path('index/operators/', views.operators, name="operators"),
+    path('employees/', views.employees, name="employees"),
+    path('payments/', views.payments, name="payments"),
+    path('serviceRequests/', views.serviceRequests, name="serviceRequests"),
+    path('stb/', views.stb, name="STB"),
     path('createPlans/', views.createPlans, name="createPlans"),
 
     path('testing/', views.testing, name='testing'),
 
     # registeration urls
-    path('newCustomer/', views.newCustomer, name='newCustomer'),
-    path('newOperator/', views.newOperator, name='newOperator'),
+    path('newCustomer/', views.newCustomer, name='newCustomer'),                   #Creates new cutomer
+    path('updateCustomer/<str:id>/', views.updateCustomer, name='updateCustomer'), #Updates cutomer
+    path('newOperator/', views.newOperator, name='newOperator'),                   #Creates new operator
+    path('updateOperator/<str:pk>/', views.updateOperator, name='updateOperator'), #Updates operator
+    path('addEmployees/', views.addEmployees, name='addEmployees'), #Creates Employees
 
     # for customers
     path('customerHome/', views.customerHome, name='customerHome'),

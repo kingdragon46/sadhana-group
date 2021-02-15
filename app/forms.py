@@ -97,7 +97,7 @@ class OperatorForm(UserCreationForm):
         widget=forms.TextInput(
             attrs={
                 "placeholder" : "Name",                
-                "class": "form-control"
+                "class": "form-control",
             }
         ))
 
@@ -247,8 +247,71 @@ class CreatePlansForm(ModelForm):
     class Meta:
         model = createPlans
         fields = '__all__'
-        
+
+
+class EmployeeForm(ModelForm):
+    SR_No = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Serial Number",                
+                "class": "form-control"
+            }
+        ))
+
+    Name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Name",                
+                "class": "form-control"
+            }
+        ))
+
+    Emp_Number = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Employee Number",                
+                "class": "form-control"
+            }
+        ))
+
+    Mobile = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Mobile",                
+                "class": "form-control"
+            }
+        ))
+
+    email = forms.EmailField(
+        widget=forms.EmailInput(
+            attrs={
+                "placeholder" : "Email Address",                
+                "class": "form-control"
+            }
+        ))
+
+    department = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "Department",                
+                "class": "form-control"
+            }
+        ))
+
+    DOJ = forms.DateField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder" : "DD-MM-YYYY",                
+                "class": "form-control datepicker"
+            }
+        ))
+    class Meta:
+        model = Employee
+        fields = '__all__'
+
 class ContactForm(forms.Form):
     from_email = forms.EmailField(required=True)
     subject = forms.CharField(required=True)
     message = forms.CharField(widget=forms.Textarea, required=True)
+
+

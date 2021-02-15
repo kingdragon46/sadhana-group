@@ -17,7 +17,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Customer Creation Page</h5>
+                            <h5 class="m-b-10">Customer Update Page</h5>
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index/"><i class="feather icon-home"></i></a></li>
@@ -55,6 +55,7 @@
                     <div class="form-control my-4">
                         <h4>Account Details</h4>
                         {% for form in form2 %}
+                            {% if form.Account_Number.value|length > 0 %}
                                 <label class="mr-2">Account Number {{ form.Account_Number | addclass:'form-control' }}</label>
                                 <label class="mr-2">STB Number {{ form.STB_Number | addclass:'form-control' }}</label>
                                 <label class="mr-2">Area {{ form.Area_Name | addclass:'form-control' }}</label>
@@ -62,11 +63,13 @@
                                 <label class="mr-2">Bank Account {{ form.Bank_Account | addclass:'form-control' }}</label>
                                 <label class="mr-2">IFSC code {{ form.IFSC_code | addclass:'form-control' }}</label>
                                 <label class="mr-2">User Active {{ form.is_active | addclass:'form-control' }}</label>
+                            {% endif %}
+                            
                         {% endfor %}
 
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Update Customer</button>
                 </form>
 
                 <!-- [ Main Content ] end -->

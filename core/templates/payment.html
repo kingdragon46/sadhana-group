@@ -10,7 +10,7 @@
 <div class="pcoded-content">
     <div class="pcoded-inner-content">
         <!-- [ breadcrumb ] start -->
-        <div class="page-header">
+        <!-- <div class="page-header">
             <div class="page-block">
                 <div class="row align-items-center">
                     <div class="col-md-12">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- [ breadcrumb ] end -->
         <div class="main-body">
             <div class="page-wrapper">
@@ -36,37 +36,25 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Customers</h5>
-                                <a href="{% url 'newCustomer' %}" role="button" style="float: right"><i class="fa fa-plus-circle" aria-hidden="true"></i>Add Customer</a>
+                                <h5>Payments</h5>
+                                <!-- <a href="{% url 'newCustomer' %}" role="button" style="float: right"><i class="fa fa-plus-circle" aria-hidden="true"></i>Add Customer</a> -->
                             </div>
                             <div class="card-block table-border-style">
                                 <div class="table-responsive">
                                     <table class="text-center table table-bordered" id="tbleCust">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Customer</th>
+                                                <th scope="col">SR.No</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Transaction ID</th>
+                                                <th scope="col">Mobile</th>
                                                 <th scope="col">Email</th>
-                                                <th scope="col">Phone</th>
-                                                <th scope="col">Update</th>
-                                                {% comment %} <th scope="col">Remove</th> {% endcomment %}
+                                                <th scope="col">Status</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for user in users %}
-                                            <tr>
-                                                <td>{{user.username}}</td>
-                                                <td>{{user.email}}</td>
-                                                <td>{{user.phone}}</td>
-                                                <td>
-                                                    <a class="btn btn-sm btn-info"
-                                                        href="#"><i
-                                                            class="fas fa-edit"></i></a>
-                                                    <a class="btn btn-sm btn-danger"
-                                                        href="#"><i class="fa fa-trash"
-                                                            aria-hidden="true"></i></a>
-                                                </td> 
-                                            </tr>
-                                            {% endfor %}
+                                            
                                         </tbody>
 
                                 </div>

@@ -57,11 +57,11 @@ def pages(request):
 
 # ----------------------------------------------Admin & Operator views------------------------------------------------------------
 
-def users(request):
+def customers(request):
     users = User.objects.all().filter(is_staff=False)
     print(users)
     context = {'users':users}
-    html_template = loader.get_template( 'ui-breadcrumb-pagination.html' )
+    html_template = loader.get_template( 'customers.html' )
     return HttpResponse(html_template.render(context, request))
 
 def operators(request):
@@ -97,24 +97,21 @@ def newCustomer(request):
         form = CustomerForm()
         form2 = Customerformset()
         if request.method == 'POST':
-            print(request.POST)
             form = CustomerForm(request.POST)
             if form.is_valid():
                 form = form.save()
                 form2 = Customerformset(request.POST, instance=form)
                 if form2.is_valid:
                    form2.save()
-                   return redirect('users')              
-                messages.success(request, 'Account is created for ' + username)
-                
+                   return redirect('customers')                          
             else:
                 msg = 'Form is not valid'    
         else:
             form = CustomerForm()
-            form2 = Customerformset(instance=user)
+            form2 = Customerformset()
     except Exception as e:
         print (e)
-    context = {"form": form, "form2": form2, "msg" : msg, "success" : success }
+    context = {"form": form, "form2": form2, "msg" : msg}
 
     html_template = loader.get_template( 'accounts/newCustomer.html')
     return HttpResponse(html_template.render(context, request))
@@ -132,14 +129,11 @@ def newOperator(request):
             form = OperatorForm(request.POST)
             # print(form)
             if form.is_valid():
-                form = form.save()
-                print(form)               
+                form = form.save()              
                 form2 = Operatorformset(request.POST, instance=form)
                 if form2.is_valid:
                    form2.save()
-                   print(form2)
                    return redirect('operators')
-                messages.success(request, 'Account is created for ' + username)
                 
             else:
                 msg = 'Form is not valid'    
@@ -148,11 +142,32 @@ def newOperator(request):
             form2 = Operatorformset(instance=user)
     except Exception as e:
         print (e)
-    context = {"form": form, "form2": form2, "msg" : msg, "success" : success }
+    context = {"form": form, "form2": form2, "msg" : msg }
 
     html_template = loader.get_template( 'accounts/newOperator.html')
     return HttpResponse(html_template.render(context, request))
 
+def updateOperator(request, pk):
+    user = User.objects.get(pk=pk)
+    form= OperatorForm(instance= user)
+    form2 = Operatorformset(instance=user)
+    
+    try:
+        if request.method == 'POST':
+            form = OperatorForm(request.POST,instance=user)
+            form2 = Operatorformset(request.POST, instance=user)
+            if form.is_valid() and form2.is_valid():
+                form = form.save()              
+                form2.save()
+                
+                return redirect('operators')
+    except Exception as e:
+        print(e)
+
+    context = {"form": form, "form2": form2}
+
+    html_template = loader.get_template( 'accounts/updateOperator.html')
+    return HttpResponse(html_template.render(context, request))
 
 def createPlans(request):
     try: 
@@ -182,10 +197,77 @@ def customerHome(request):
     html_template = loader.get_template( 'accounts/customer_home.html')
     return HttpResponse(html_template.render(context, request))
 
+def updateCustomer(request, id):
+    user = User.objects.get(pk=id)
+    form= CustomerForm(instance= user)
+    form2 = Customerformset(instance= user)
+    # print(form2)
+    try:
+        if request.method == 'POST':           
+            form = CustomerForm(request.POST,instance=user)
+            form2 = Customerformset(request.POST, instance=user)
+            if form.is_valid() and form2.is_valid():
+                form = form.save()                            
+                form2.save()
+                
+                return redirect('customers')
+    except Exception as e:
+        print(e)
+
+    context = {"form":form, "form2": form2}
+
+    html_template = loader.get_template( 'accounts/updateCustomer.html')
+    return HttpResponse(html_template.render(context, request))
+
 
 def customerTickets(request):
 
     context={}
 
     html_template = loader.get_template( 'tickets.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+def addEmployees(request):
+    form= EmployeeForm()
+    try:
+        if request.method == 'POST':
+            form = EmployeeForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Account is created')
+
+            else:
+                print('Form is not valid')
+    except Exception as e:
+        print(e)
+
+    context={"form": form}
+
+    html_template = loader.get_template( 'addEmployee.html')
+    return HttpResponse(html_template.render(context, request))
+
+def employees(request):
+    users = Employee.objects.all()
+    print(users)
+    context = {'users':users}
+    html_template = loader.get_template( 'employees.html' )
+    return HttpResponse(html_template.render(context, request))
+
+def payments(request):
+    
+    context = {}
+    html_template = loader.get_template( 'payment.html' )
+    return HttpResponse(html_template.render(context, request))
+
+def serviceRequests(request):
+    
+    context = {}
+    html_template = loader.get_template( 'serviceRequest.html' )
+    return HttpResponse(html_template.render(context, request))
+
+def stb(request):
+    
+    context = {}
+    html_template = loader.get_template( 'stb.html' )
     return HttpResponse(html_template.render(context, request))
