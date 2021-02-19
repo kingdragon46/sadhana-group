@@ -11,7 +11,7 @@ from .forms import *
 from .models import *
 from authentication.forms import SignUpForm
 from django.forms import inlineformset_factory
-
+import json
 
 def home(request):
     
@@ -92,20 +92,16 @@ def testing(request):
 
 def newCustomer(request):
     msg     = None
-    success = False
+    # success = False
     try:
         form = CustomerForm()
         form2 = Customerformset()
         if request.method == 'POST':
-            form = CustomerForm(request.POST)
-            if form.is_valid():
-                form = form.save()
-                form2 = Customerformset(request.POST, instance=form)
-                if form2.is_valid:
-                   form2.save()
-                   return redirect('customers')                          
-            else:
-                msg = 'Form is not valid'    
+                cust = cust_save(request)
+                if cust:
+                    return redirect('customers')                       
+                else:
+                    msg = 'Form is not valid' 
         else:
             form = CustomerForm()
             form2 = Customerformset()
@@ -115,6 +111,44 @@ def newCustomer(request):
 
     html_template = loader.get_template( 'accounts/newCustomer.html')
     return HttpResponse(html_template.render(context, request))
+
+def cust_save(request):
+    flag = False
+    form = CustomerForm(request.POST)
+    if form.is_valid():
+        form = form.save()
+        flag = True
+        form2 = Customerformset(request.POST, instance=form)
+        stb = STB.objects.get(id=id)
+        if form2.is_valid:
+            form2.save()
+        else:    
+            flag = False     
+    return flag
+    
+# def save_profile(request):
+#     profile = Profile.objects.all()
+#     # print(profile)
+#     if request.method == 'POST':
+#         email = request.POST.get('email')
+#         name = request.POST.get('name')
+#         select = request.POST.getlist('select')
+#         print(select)
+#         profile = Profile(name=name, email=email)
+#         profile.save()
+#         books = Books(is_active=True, profile_id=profile)
+#         books.save()
+#     else:
+#         print('Error')
+    
+#     context= {'profile':profile}
+#     html_template = loader.get_template( 'accounts/profile.html')
+#     return HttpResponse(html_template.render(context, request))
+
+
+def get_stb_by_id(request, pk):
+    stb = STB.objects.get(pk=pk)
+    
 
 def newOperator(request):
     msg     = None
@@ -270,4 +304,23 @@ def stb(request):
     
     context = {}
     html_template = loader.get_template( 'stb.html' )
+    return HttpResponse(html_template.render(context, request))
+
+def addstb(request):
+    form= stbForm()
+    try:
+        if request.method == 'POST':
+            form = stbForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Account is created')
+
+            else:
+                print('Form is not valid')
+    except Exception as e:
+        print(e)
+
+    context={"form": form}
+
+    html_template = loader.get_template( 'addstb.html')
     return HttpResponse(html_template.render(context, request))

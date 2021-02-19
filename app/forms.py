@@ -314,4 +314,47 @@ class ContactForm(forms.Form):
     subject = forms.CharField(required=True)
     message = forms.CharField(widget=forms.Textarea, required=True)
 
-
+class stbForm(forms.ModelForm):
+    # serial_number = forms.CharField(
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             "placeholder" : "Serial Number",                
+    #             "class": "form-control"
+    #         }
+    #     ))
+    # issue_date = forms.CharField(
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             "placeholder" : "Issue Date",                
+    #             "class": "form-control"
+    #         }
+    #     ))
+    
+    
+    # DOP = forms.DateField(
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             "placeholder" : "DD-MM-YYYY",                
+    #             "class": "form-control datepicker"
+    #         }
+    #     ))
+    
+    # remark = forms.CharField(
+    #     widget=forms.TextInput(
+    #         attrs={    
+    #             "placeholder" : "Remark",            
+    #             "class": "form-control"
+    #         }
+    #     ))
+    # model_number = forms.CharField(
+    #     widget=forms.TextInput(
+    #         attrs={    
+    #             "placeholder" : "Model Number",            
+    #             "class": "form-control"
+    #         }
+    #     ))
+    class Meta:
+        model = STB
+        fields = '__all__'
+        exclude= ('user_id', 'is_assigned')
+    

@@ -20,6 +20,8 @@ urlpatterns = [
     path('serviceRequests/', views.serviceRequests, name="serviceRequests"),
     path('stb/', views.stb, name="STB"),
     path('createPlans/', views.createPlans, name="createPlans"),
+    path('addstb/', views.addstb, name="addstb"),
+    path('save_profile/', views.save_profile, name="save_profile"),
 
     path('testing/', views.testing, name='testing'),
 

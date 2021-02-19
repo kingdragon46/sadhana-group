@@ -1,0 +1,45 @@
+{% extends "layouts/base.html" %}
+
+{% load myfilters %}
+
+{% block title %} UI Forms {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <form role="form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <div class="form-control">
+                        <h4>Add STB</h4>
+                        <div class="row">
+                            
+                            <div class="form-control col-md-6 my-2">
+                                {{form.as_p}}
+                            </div>
+                           
+                        </div>
+                    </div>
+
+                   
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+
+                <!-- [ Main Content ] end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
