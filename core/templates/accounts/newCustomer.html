@@ -35,36 +35,104 @@
                 <form role="form" action="" method="POST">
                     {% csrf_token %}
 
+                    {% if message %}
+                        <div class="alert alert-{{class}}">
+                            {{message}}
+                        </div>
+                    {% endif %}
+
                     <div class="form-control">
-                        <h4>Basic Details</h4>
+                        <h4>Profile</h4>
                         <div class="row">
-                            {% for f in form %}
+
                             <div class="col-md-6 my-2">
-                                {{f}}
-                                {{f.errors}}
+                                <label for=""> Username</label>
+                                <input type="text" class="form-control" placeholder="Username" name="username">
                             </div>
-                            {% endfor %}
-                            
-                            
+
+                            <div class="col-md-6 my-2">
+                                <label for=""> Name</label>
+                                <input type="text" class="form-control" placeholder="Name" name="name">
+                            </div>
+
+                            <div class="col-md-6 my-2">
+                                <label for=""> Email</label>
+                                <input type="text" class="form-control" placeholder="Email" name="email">
+                            </div>
+
+                            <div class="col-md-6 my-2">
+                                <label for=""> Phone</label>
+                                <input type="text" class="form-control" placeholder="Phone" name="phone">
+                            </div>
+
+                            <div class="col-md-6 my-2">
+                                <label for=""> Address Line1</label>
+                                <input type="text" class="form-control" placeholder="Address Line1" name="addressline1">
+                            </div>
+
+                            <div class="col-md-6 my-2">
+                                <label for=""> Address Line2</label>
+                                <input type="text" class="form-control" placeholder="Address Line2" name="addressline2">
+                            </div>
+
+                            <div class="col-md-6 my-2">
+                                <label for=""> City</label>
+                                <input type="text" class="form-control" placeholder="City" name="city">
+                            </div>
+
+                            <div class="col-md-6 my-2">
+                                <label for=""> Pincode</label>
+                                <input type="text" class="form-control" placeholder="Pincode" name="pincode">
+                            </div>
+
                         </div>
                         
+                        <h4 class="mt-3">Account Details</h4>
+                        <div class="row">
+                            <div class="col-md-6 my-2">
+                                <label for=""> Account Number</label>
+                                <input type="text" class="form-control" placeholder="Account Number" name="Account_Number">
+                            </div>
+
+                            <div class="col-md-6 my-2">
+                                <label for=""> Area Name</label>
+                                <input type="text" class="form-control" placeholder="Area Name" name="Area_Name">
+                            </div>
+
+                            <div class="col-md-6 my-2">
+                                <label for=""> STB</label>
+                                    <select class="form-control" placeholder="Email" name="select1">
+                                        {% for STB in stb %}
+                                        <option value="{{STB.serial_number}}">{{STB.serial_number}}</option>
+                                        {% endfor %}
+                                    </select>
+                                
+                            </div>
+
+                            <div class="col-md-6 my-2">
+                                <label for="">Node</label>
+                                    <select class="form-control" placeholder="Email" name="select2">
+                                        {% for Node in node %}
+                                        <option value="{{Node.serial_number}}">{{Node.serial_number}}</option>
+                                        {% endfor %}
+                                    </select>
+                                
+                            </div>
+
+                            <div class="col-md-6 my-2">
+                                <label for=""> Bank Account</label>
+                                <input type="text" class="form-control" placeholder="Bank Account" name="Bank_Account">
+                            </div>
+
+                            <div class="col-md-6 my-2">
+                                <label for=""> IFSC Code</label>
+                                <input type="text" class="form-control" placeholder="IFSC code" name="IFSC_code">
+                            </div>
+
+                        </div>
+
                     </div>
 
-                    {{ form2.management_form }}
-
-                    <div class="form-control my-4">
-                        <h4>Account Details</h4>
-                        {% for form in form2 %}
-                                <label class="mr-2">Account Number {{ form.Account_Number | addclass:'form-control' }}</label>
-                                <label class="mr-2">STB Number {{ form.STB_Number | addclass:'form-control' }}</label>
-                                <label class="mr-2">Area {{ form.Area_Name | addclass:'form-control' }}</label>
-                                <label class="mr-2">NODE Number {{ form.NODE_Number | addclass:'form-control' }}</label>
-                                <label class="mr-2">Bank Account {{ form.Bank_Account | addclass:'form-control' }}</label>
-                                <label class="mr-2">IFSC code {{ form.IFSC_code | addclass:'form-control' }}</label>
-                                <label class="mr-2">User Active {{ form.is_active | addclass:'form-control' }}</label>
-                        {% endfor %}
-
-                    </div>
 
                     <button type="submit" class="btn btn-primary">Create</button>
                 </form>

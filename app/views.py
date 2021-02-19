@@ -1,6 +1,4 @@
 # -*- encoding: utf-8 -*-
-
-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader
@@ -91,59 +89,75 @@ def testing(request):
 
 
 def newCustomer(request):
-    msg     = None
-    # success = False
+    stb = STB.objects.all().filter(is_assigned=False)
+    node = Node.objects.all()
+    # print(stb)
     try:
-        form = CustomerForm()
-        form2 = Customerformset()
         if request.method == 'POST':
-                cust = cust_save(request)
-                if cust:
-                    return redirect('customers')                       
-                else:
-                    msg = 'Form is not valid' 
+            username = request.POST.get('username')
+            name = request.POST.get('name')
+            email = request.POST.get('email')
+            phone = request.POST.get('phone')
+            addressline1 = request.POST.get('addressline1')
+            addressline2 = request.POST.get('addressline2')
+            city = request.POST.get('city')
+            pincode = request.POST.get('pincode')
+            Account_Number = request.POST.get('Account_Number')
+            select1 = request.POST.get('select1')
+            select2 = request.POST.get('select2')
+            Area_Name = request.POST.get('Area_Name')
+            Bank_Account = request.POST.get('Bank_Account')
+            IFSC_code = request.POST.get('IFSC_code')
+            # print(select)
+            check_profile = User.objects.filter(email = email).first()
+            if check_profile:
+                context = {'message' : 'User already exists' , 'class' : 'danger' }
+                return render(request,'accounts/newCustomer.html' , context)
+            user = User(username=username, email=email, first_name=name, phone=phone, addressline1=addressline1, addressline2=addressline2, city=city, pincode=pincode)
+            user.save()
+            check_stb = STB.objects.all().filter(serial_number=select1)
+            check_node = Node.objects.all().filter(serial_number=select2)
+            check_stb.update(is_assigned=True)
+            print(check_stb[0])
+            cust = Customer(user=user, STB_Number=check_stb[0], NODE_Number=check_node[0], Account_Number=Account_Number, Area_Name=Area_Name, Bank_Account=Bank_Account, IFSC_code=IFSC_code)
+            cust.save()
+            context = {'stb':stb, 'node':node, 'message' : 'Customer created successfully' , 'class' : 'success' }
+            return render(request,'accounts/newCustomer.html' , context)
         else:
-            form = CustomerForm()
-            form2 = Customerformset()
+            print('Error')
     except Exception as e:
-        print (e)
-    context = {"form": form, "form2": form2, "msg" : msg}
+        print(e)
+    
+    context= {'stb':stb, 'node':node}
 
     html_template = loader.get_template( 'accounts/newCustomer.html')
     return HttpResponse(html_template.render(context, request))
 
-def cust_save(request):
-    flag = False
-    form = CustomerForm(request.POST)
-    if form.is_valid():
-        form = form.save()
-        flag = True
-        form2 = Customerformset(request.POST, instance=form)
-        stb = STB.objects.get(id=id)
-        if form2.is_valid:
-            form2.save()
-        else:    
-            flag = False     
-    return flag
     
-# def save_profile(request):
-#     profile = Profile.objects.all()
-#     # print(profile)
-#     if request.method == 'POST':
-#         email = request.POST.get('email')
-#         name = request.POST.get('name')
-#         select = request.POST.getlist('select')
-#         print(select)
-#         profile = Profile(name=name, email=email)
-#         profile.save()
-#         books = Books(is_active=True, profile_id=profile)
-#         books.save()
-#     else:
-#         print('Error')
+def save_profile(request):
+    stb = STB.objects.all()
+    # print(stb)
+    try:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            name = request.POST.get('name')
+            email = request.POST.get('email')
+            select = request.POST.get('select')
+            # print(select)
+            user = User(username=username, email=email, first_name=name)
+            user.save()
+            check_stb = STB.objects.all().filter(serial_number=select)
+            print(check_stb[0])
+            cust = Customer(user=user, STB_Number=check_stb[0])
+            cust.save()
+        else:
+            print('Error')
+    except Exception as e:
+        print(e)
     
-#     context= {'profile':profile}
-#     html_template = loader.get_template( 'accounts/profile.html')
-#     return HttpResponse(html_template.render(context, request))
+    context= {'stb':stb}
+    html_template = loader.get_template( 'accounts/profile.html')
+    return HttpResponse(html_template.render(context, request))
 
 
 def get_stb_by_id(request, pk):

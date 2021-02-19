@@ -13,5 +13,4 @@ admin.site.register(STB)
 admin.site.register(Node)
 admin.site.register(PaymentDetails)
 admin.site.register(CollectionAgent)
-admin.site.register(Profile)
-admin.site.register(Books)
+

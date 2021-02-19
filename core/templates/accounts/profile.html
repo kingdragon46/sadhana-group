@@ -40,6 +40,10 @@
                         <div class="row">
                             
                             <div class="col-md-6 my-2">
+                                <input type="text" class="form-control" placeholder="Username" name="username">
+                            </div>
+                            
+                            <div class="col-md-6 my-2">
                                 <input type="text" class="form-control" placeholder="Name" name="name">
                             </div>
                             
@@ -49,8 +53,8 @@
                             
                             <div class="col-md-6 my-2">
                                 <select class="form-control" placeholder="Email" name="select">
-                                    {% for prof in profile %}
-                                        <option value="{{prof.name}}">{{prof.name}}</option>
+                                    {% for STB in stb %}
+                                        <option value="{{STB.serial_number}}">{{STB.serial_number}}</option>
                                     {% endfor %}
                                     
                                 </select>
