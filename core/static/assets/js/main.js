@@ -1,7 +1,6 @@
 
 !(function($) {
   "use strict";
-  $('#tbleCust').DataTable();
 
   // Preloader
   $(window).on('load', function() {
