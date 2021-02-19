@@ -137,5 +137,35 @@ class CollectionAgent(models.Model):
     branch_name = models.CharField(_("Branch Name"), max_length=50, null=True)
 
     def __str__(self):
-        return f'{self.collector_id}'
+        return f'{self.collector_id}' or ''
 
+
+sr_status = (
+    ("1","Open"),
+    ("2","Work in Progress"),
+    ("3","Complete"),
+    ("4","Closed"),
+    ("5","Canceled"),
+)
+
+class ServiceRequest(models.Model):
+    # filled by customer
+    request_id = models.CharField(_("Request ID"), max_length=50, null=True)
+    name = models.CharField(_("Name"), max_length=50, null=True)
+    mobile = models.CharField(_("Mobile"), max_length=50, null=True)
+    email = models.CharField(_("Email"), max_length=50, null=True)
+    city = models.CharField(_("City"), max_length=50, null=True)
+    message_box = models.TextField(_("Message"), null=True, blank=True)
+    sr_type = models.CharField(_("Service Request Type"), max_length=50, null=True)
+    sub_type = models.CharField(_("Sub Type"), max_length=50, null=True)
+    stb = models.ForeignKey(STB, on_delete=models.PROTECT, null=True)
+
+    # filled by Employee
+    status = models.CharField(_("Status"), max_length=50, choices = sr_status, default = '1')
+    node_details = models.OneToOneField(Node, on_delete=models.PROTECT, null=True)
+
+    # filled by Admin
+    allotment = models.OneToOneField(Employee, on_delete=models.PROTECT, null=True)
+
+    def __str__(self):
+        return f'{self.request_id}' or ''

@@ -10602,3 +10602,17 @@ div.code-toolbar > .toolbar span:hover {
 input[type=text], [type=email],[type=number]{
   background-color: white;
 }
+
+.table-responsive{
+  padding: 10px;
+  border: solid 1px darkslategrey;
+}
+
+.dataTable{
+  border-color: #6a00ff;
+}
+
+.dataTable thead tr{
+  background-color: #1ba1e2;
+  color: whitesmoke;
+}

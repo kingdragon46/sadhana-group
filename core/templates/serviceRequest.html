@@ -52,16 +52,32 @@
                                                 <th scope="col">City</th>
                                                 <th scope="col">Operator</th>
                                                 <th scope="col">Message</th>
-                                                <th scope="col">Allotment by Default (Area Wise)</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Time</th>
-                                                
+                                                <!-- <th scope="col">Allotment by Default (Area Wise)</th> -->
+                                                <th scope="col">Status</th>   
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            
+                                            {% for SR in sr %}
+                                                <tr>
+                                                    <th scope="col">{{ forloop.counter }}</th>
+                                                    <th scope="col">{{SR.name}}</th>
+                                                    <th scope="col">{{SR.stb}}</th>
+                                                    <th scope="col">{{SR.mobile}}</th>
+                                                    <th scope="col">{{SR.email}}</th>
+                                                    <th scope="col">{{SR.city}}</th>
+                                                    <th scope="col"></th>
+                                                    <th scope="col">{{SR.message_box}}</th>
+                                                    <!-- <th scope="col"></th> -->
+                                                    <th scope="col">{{SR.status}}</th>
+                                                </tr>
+                                            {% endfor %}
                                         </tbody>
-
+                                    </table>
+                                    <div>
+                                        
+                                            
+                                        
+                                    </div>
                                 </div>
                             </div>
                         </div>

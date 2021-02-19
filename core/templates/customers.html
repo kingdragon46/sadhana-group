@@ -28,7 +28,7 @@
         </div>
         <!-- [ breadcrumb ] end -->
         <div class="main-body">
-            <div class="page-wrapper">
+            <div class="page-wrapper Recent-Users">
                 <!-- [ Main Content ] start -->
                 <div class="row">
                     
@@ -44,6 +44,7 @@
                                     <table class="text-center table table-bordered" id="tbleCust">
                                         <thead>
                                             <tr>
+                                                <th scope="col">S. No.</th>
                                                 <th scope="col">Customer</th>
                                                 <th scope="col">Email</th>
                                                 <th scope="col">Phone</th>
@@ -54,15 +55,14 @@
                                         <tbody>
                                             {% for user in users %}
                                             <tr>
+                                                <td>{{forloop.counter}}</td>
                                                 <td>{{user.username}}</td>
                                                 <td>{{user.email}}</td>
                                                 <td>{{user.phone}}</td>
                                                 <td>
-                                                    <a class="btn btn-sm btn-info"
-                                                        href="{% url 'updateCustomer' user.id %}"><i
-                                                            class="fas fa-edit"></i></a>
-                                                    <a class="btn btn-sm btn-danger"
-                                                        href="#"><i class="fa fa-trash"
+                                                    <a class="label theme-bg text-white f-12 mr-1" href="{% url 'updateCustomer' user.id %}"><i
+                                                            class="fas fa-edit text-white"></i></a>
+                                                    <a href="#" class="label bg-danger text-white f-12 mr-1"><i class="fa fa-trash text-white"
                                                             aria-hidden="true"></i></a>
                                                 </td> 
                                             </tr>

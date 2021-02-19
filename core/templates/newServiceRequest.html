@@ -46,11 +46,6 @@
                         <div class="row">
 
                             <div class="col-md-6 my-2">
-                                <label for=""> Username</label>
-                                <input type="text" class="form-control" placeholder="Username" name="username">
-                            </div>
-
-                            <div class="col-md-6 my-2">
                                 <label for=""> Name</label>
                                 <input type="text" class="form-control" placeholder="Name" name="name">
                             </div>
@@ -62,75 +57,39 @@
 
                             <div class="col-md-6 my-2">
                                 <label for=""> Phone</label>
-                                <input type="text" class="form-control" placeholder="Phone" name="phone">
+                                <input type="tel" class="form-control" placeholder="Phone" name="mobile">
                             </div>
-
-                            <div class="col-md-6 my-2">
-                                <label for=""> Address Line1</label>
-                                <input type="text" class="form-control" placeholder="Address Line1" name="addressline1">
-                            </div>
-
-                            <div class="col-md-6 my-2">
-                                <label for=""> Address Line2</label>
-                                <input type="text" class="form-control" placeholder="Address Line2" name="addressline2">
-                            </div>
-
+                            
                             <div class="col-md-6 my-2">
                                 <label for=""> City</label>
                                 <input type="text" class="form-control" placeholder="City" name="city">
                             </div>
 
                             <div class="col-md-6 my-2">
-                                <label for=""> Pincode</label>
-                                <input type="text" class="form-control" placeholder="Pincode" name="pincode">
-                            </div>
-
-                        </div>
-                        
-                        <h4 class="mt-3">Account Details</h4>
-                        <div class="row">
-                            <div class="col-md-6 my-2">
-                                <label for=""> Account Number</label>
-                                <input type="text" class="form-control" placeholder="Account Number" name="Account_Number">
+                                <label for=""> Message</label>
+                                <input type="text" class="form-control" placeholder="Message" name="message_box">
                             </div>
 
                             <div class="col-md-6 my-2">
-                                <label for=""> Area Name</label>
-                                <input type="text" class="form-control" placeholder="Area Name" name="Area_Name">
+                                <label for=""> Service Request Type</label>
+                                <input type="text" class="form-control" placeholder="Service Request Type" name="sr_type">
+                            </div>
+
+
+                            <div class="col-md-6 my-2">
+                                <label for=""> Sub type</label>
+                                <input type="text" class="form-control" placeholder="Sub Type" name="sub_type">
                             </div>
 
                             <div class="col-md-6 my-2">
                                 <label for=""> STB</label>
-                                    <select class="form-control" placeholder="STB" name="select1">
-                                        {% for STB in stb %}
+                                <select class="form-control" placeholder="STB" name="select1">
+                                    {% for STB in stb %}
                                         <option value="{{STB.serial_number}}">{{STB.serial_number}}</option>
-                                        {% endfor %}
-                                    </select>
-                                
+                                    {% endfor %}
+                                </select>
                             </div>
-
-                            <div class="col-md-6 my-2">
-                                <label for="">Node</label>
-                                    <select class="form-control" placeholder="Node" name="select2">
-                                        {% for Node in node %}
-                                        <option value="{{Node.serial_number}}">{{Node.serial_number}}</option>
-                                        {% endfor %}
-                                    </select>
-                                
-                            </div>
-
-                            <div class="col-md-6 my-2">
-                                <label for=""> Bank Account</label>
-                                <input type="text" class="form-control" placeholder="Bank Account" name="Bank_Account">
-                            </div>
-
-                            <div class="col-md-6 my-2">
-                                <label for=""> IFSC Code</label>
-                                <input type="text" class="form-control" placeholder="IFSC code" name="IFSC_code">
-                            </div>
-
                         </div>
-
                     </div>
 
 

@@ -309,9 +309,38 @@ def payments(request):
     return HttpResponse(html_template.render(context, request))
 
 def serviceRequests(request):
+    sr = ServiceRequest.objects.all()
     
-    context = {}
+    context = {'sr':sr}
     html_template = loader.get_template( 'serviceRequest.html' )
+    return HttpResponse(html_template.render(context, request))
+
+def addserviceRequests(request):
+    stb = STB.objects.all()
+    print(stb)
+    try:
+        if request.method == 'POST':
+            name = request.POST.get('name')
+            email = request.POST.get('email')
+            mobile = request.POST.get('mobile')
+            city = request.POST.get('city')
+            message_box = request.POST.get('message_box')
+            sr_type = request.POST.get('sr_type')
+            sub_type = request.POST.get('sub_type')
+            select1 = request.POST.get('select1')
+            check_stb = STB.objects.all().filter(serial_number=select1)
+            print(check_stb[0])
+            sr = ServiceRequest(name=name, email=email, mobile=mobile, city=city, sr_type=sr_type, sub_type=sub_type, stb=check_stb[0])
+            sr.save()
+            context = {'stb':stb, 'message' : 'Complaint created successfully' , 'class' : 'success' }
+            return render(request,'newServiceRequest.html' , context)
+        else:
+            print('Error')
+    except Exception as e:
+        print(e)
+    
+    context = {'stb':stb}
+    html_template = loader.get_template( 'newServiceRequest.html' )
     return HttpResponse(html_template.render(context, request))
 
 def stb(request):
