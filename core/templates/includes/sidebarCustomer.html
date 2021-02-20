@@ -1,17 +1,19 @@
 
     <nav class="pcoded-navbar">
         <div class="navbar-wrapper">
-            <div class="navbar-brand header-logo">
-                <a target="_blank" 
-                   href="https://technovalty.com" class="b-brand">
-                    <div class="logo scrollto">
-                        <img src="/static/assets/img/Logo/logo.png" alt=""
-                        class="img-fluid">
-                    </div>
-                    <span class="b-title">Hello, {{request.user}}</span>
-                </a>
-                <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+            <div class="navbar-brand header-logo d-block text-left" style="height:100px;">
+
+            <div class="logo scrollto mb-1">
+                <img src="/static/assets/img/Logo/logo2.png" alt="" class="img-fluid" style="height:46px;"><br>
             </div>
+            <div class="b-brand d-block">
+                <span class="b-title">Hello, {{request.user}}</span>
+                <a href="{% url 'logout' %}" class="float-right"><i class="feather icon-power"></i>
+                </a>
+            </div>
+
+            <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+        </div>
             <div class="navbar-content scroll-div">
                 <ul class="nav pcoded-inner-navbar">
                     <li class="nav-item pcoded-menu-caption">
@@ -24,7 +26,7 @@
 
                     <li data-username="form elements advance componant validation masking wizard picker select" 
                         class="nav-item {% if 'ui-forms' in segment %} active {% endif %}">
-                        <a <a href="{% url 'customerTickets' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Tickets</span></a>
+                        <a <a href="{% url 'addserviceRequests' %}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Tickets</span></a>
                     </li>
                     
                     <li class="nav-item pcoded-menu-caption">

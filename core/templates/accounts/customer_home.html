@@ -50,57 +50,136 @@
         <div class="pcoded-wrapper">
 
             {% block content %}
-                <h4>Hi {{user}}</h4>
-                <div class="form-control mx-3 col-md-11">
-                    <h4>Basic Details</h4>
-                    <div class="row">
-                        <div class="form-control col-md-3 mb-3 mx-3">
-                            {{cust.username}}
-                        </div>
-                        <div class="form-control col-md-3 mb-3 mr-3">
-                            {{cust.email}}
-                        </div>
-                        <div class="form-control col-md-3 mb-3 ">
-                            {{cust.phone}}
-                        </div>
-                        <div class="form-control col-md-3 mb-3 mx-3">
-                            {{cust.addressline1}}
-                        </div>
-                        <div class="form-control col-md-3 mb-3 mr-3">
-                            {{cust.addressline2}}
-                        </div>
-                        <div class="form-control col-md-3 mb-3">
-                            {{cust.city}}
-                        </div>
-                        <div class="form-control col-md-3 mb-3 mx-3">
-                            {{cust.pincode}}
-                        </div>
-                    </div>
-                    
-                    <br><h4>Account Details</h4>
-                   <div class="row">
-                        
-                        {% for user in users %}
-                            <div class="form-control col-md-3 mb-3 mx-3">
-                                {{user.Account_Number}}
+                <!-- <h4>Hi {{cust}}</h4> -->
+                <div class="container">
+                    <div class="form-control mx-3 my-3 col-md-11">
+                        <h4><b>Basic Details</b></h4>
+                        <hr>
+                        <!-- <div class="row"> -->
+                            <div class=" row mb-3 mx-3">
+                                <div class="col mx-6">
+                                    <label for=""><b>Username: </b></label>
+                                </div>
+                                <div class="col mx-6">
+                                    {{cust.username}}
+                                </div>
                             </div>
-                            <div class="form-control col-md-3 mb-3 mr-3">
-                                {{user.STB_Number}}
+                            <div class=" row mb-3 mx-3">
+                                <div class="col mx-6">
+                                    <label for=""><b>Name: </b></label>
+                                </div>
+                                <div class="col mx-6">
+                                    {{cust.first_name}}
+                                </div>
                             </div>
-                            <div class="form-control col-md-3 mb-3">
-                                {{user.Area_Name}}
+                            <div class=" row mb-3 mx-3">
+                                <div class="col mx-6">
+                                    <label for=""><b>Email: </b></label>
+                                </div>
+                                <div class="col mx-6">
+                                    {{cust.email}}
+                                </div>
                             </div>
-                            <div class="form-control col-md-3 mb-3 mx-3">
-                                {{user.NODE_Number}}
+                            <div class=" row mb-3 mx-3">
+                                <div class="col mx-6">
+                                    <label for=""><b>Phone: </b></label>
+                                </div>
+                                <div class="col mx-6">
+                                    {{cust.phone}}
+                                </div>
                             </div>
-                            <div class="form-control col-md-3 mb-3 mr-3">
-                                {{user.Bank_Account}}
+                            <div class=" row mb-3 mx-3">
+                                <div class="col mx-6">
+                                    <label for=""><b>Address Line1: </b></label>
+                                </div>
+                                <div class="col mx-6">
+                                    {{cust.addressline1}}
+                                </div>
                             </div>
-                            <div class="form-control col-md-3 mb-3">
-                                {{user.IFSC_code}}
+                            <div class=" row mb-3 mx-3">
+                                <div class="col mx-6">
+                                    <label for=""><b>Address Line2: </b></label>
+                                </div>
+                                <div class="col mx-6">
+                                    {{cust.addressline2}}
+                                </div>
+                            </div>
+                            <div class=" row mb-3 mx-3">
+                                <div class="col mx-6">
+                                    <label for=""><b>City: </b></label>
+                                </div>
+                                <div class="col mx-6">
+                                    {{cust.city}}
+                                </div>
+                            </div>
+                            <div class=" row mb-3 mx-3">
+                                <div class="col mx-6">
+                                    <label for=""><b>Pincode: </b></label>
+                                </div>
+                                <div class="col mx-6">
+                                    {{cust.pincode}}
+                                </div>
                             </div>
                             
-                        {% endfor %}
+                        <!-- </div> -->
+                        
+                        <br><h4><b>Account Details</b></h4>
+                        <hr>
+                    <!-- <div class="row"> -->
+                            
+                            {% for user in users %}
+
+                                <div class=" row mb-3 mx-3">
+                                    <div class="col mx-6">
+                                        <label for=""><b>Account Number: </b></label>
+                                    </div>
+                                    <div class="col mx-6">
+                                        {{user.Account_Number}}
+                                    </div>
+                                </div>
+                                <div class=" row mb-3 mx-3">
+                                    <div class="col mx-6">
+                                        <label for=""><b>STB Number: </b></label>
+                                    </div>
+                                    <div class="col mx-6">
+                                        {{user.STB_Number}}
+                                    </div>
+                                </div>                            
+                                <div class=" row mb-3 mx-3">
+                                    <div class="col mx-6">
+                                        <label for=""><b>Area Name: </b></label>
+                                    </div>
+                                    <div class="col mx-6">
+                                        {{user.Area_Name}}
+                                    </div>
+                                </div>
+                                <div class=" row mb-3 mx-3">
+                                    <div class="col mx-6">
+                                        <label for=""><b>Node Number: </b></label>
+                                    </div>
+                                    <div class="col mx-6">
+                                        {{user.NODE_Number}}
+                                    </div>
+                                </div>
+                                <div class=" row mb-3 mx-3">
+                                    <div class="col mx-6">
+                                        <label for=""><b>Bank Account Number: </b></label>
+                                    </div>
+                                    <div class="col mx-6">
+                                        {{user.Bank_Account}}
+                                    </div>
+                                </div>
+                                <div class=" row mb-3 mx-3">
+                                    <div class="col mx-6">
+                                        <label for=""><b>IFSC Code: </b></label>
+                                    </div>
+                                    <div class="col mx-6">
+                                        {{user.IFSC_code}}
+                                    </div>
+                                </div>
+                                
+                            {% endfor %}
+                        <!-- </div> -->
                     </div>
                 </div>
             {% endblock content %}
