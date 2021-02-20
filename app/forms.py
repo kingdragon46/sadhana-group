@@ -274,7 +274,7 @@ class EmployeeForm(ModelForm):
             }
         ))
 
-    Mobile = forms.CharField(
+    mobile = forms.CharField(
         widget=forms.TextInput(
             attrs={
                 "placeholder" : "Mobile",                

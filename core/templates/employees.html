@@ -18,7 +18,7 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Customers</h5>
+                                <h5>Employees</h5>
                                 <a href="{% url 'addEmployees' %}" role="button" style="float: right"><i class="fa fa-plus-circle" aria-hidden="true"></i>Add Employee</a>
                             </div>
                             <div class="card-block table-border-style">
@@ -38,10 +38,10 @@
                                         <tbody>
                                             {% for user in users %}
                                             <tr>
-                                                <td>{{user.SR_No}}</td>
+                                                <td>{{forloop.counter}}</td>
                                                 <td>{{user.Name}}</td>
                                                 <td>{{user.Emp_Number}}</td>
-                                                <td>{{user.Mobile}}</td>
+                                                <td>{{user.mobile}}</td>
                                                 <td>{{user.email}}</td>
                                                 <td>{{user.department}}</td>
                                                 <td>{{user.DOJ}}</td>

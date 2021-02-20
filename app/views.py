@@ -5,11 +5,13 @@ from django.template import loader
 from django.http import HttpResponse
 from django import template
 from authentication.models import User
+from django.contrib.auth.models import Group
 from .forms import *
 from .models import *
 from authentication.forms import SignUpForm
 from django.forms import inlineformset_factory
 import json
+from .decorators import allowed_users
 
 def home(request):
     
@@ -28,6 +30,7 @@ def index(request):
 
     html_template = loader.get_template( 'index.html' )
     return HttpResponse(html_template.render(context, request))
+
 
 @login_required(login_url="/login/")
 def pages(request):
@@ -55,6 +58,9 @@ def pages(request):
 
 # ----------------------------------------------Admin & Operator views------------------------------------------------------------
 
+
+@login_required(login_url="/login/")
+@allowed_users(allowed_roles=['Admin'])
 def customers(request):
     users = User.objects.all().filter(is_staff=False)
     print(users)
@@ -62,6 +68,8 @@ def customers(request):
     html_template = loader.get_template( 'customers.html' )
     return HttpResponse(html_template.render(context, request))
 
+
+@login_required(login_url="/login/")
 def operators(request):
     users = User.objects.all().filter(is_staff=True, is_superuser=False)
     print(users)
@@ -88,7 +96,10 @@ def testing(request):
 
 
 
+@login_required(login_url="/login/")
 def newCustomer(request):
+    u =User.objects.filter(groups__name='Admin')
+    print(u)
     stb = STB.objects.all().filter(is_assigned=False)
     node = Node.objects.all()
     # print(stb)
@@ -115,6 +126,8 @@ def newCustomer(request):
                 return render(request,'accounts/newCustomer.html' , context)
             user = User(username=username, email=email, first_name=name, phone=phone, addressline1=addressline1, addressline2=addressline2, city=city, pincode=pincode)
             user.save()
+            group = Group.objects.get(name='Customer')
+            user.groups.add(group)
             check_stb = STB.objects.all().filter(serial_number=select1)
             check_node = Node.objects.all().filter(serial_number=select2)
             check_stb.update(is_assigned=True)
@@ -164,6 +177,8 @@ def get_stb_by_id(request, pk):
     stb = STB.objects.get(pk=pk)
     
 
+
+@login_required(login_url="/login/")
 def newOperator(request):
     msg     = None
     success = False
@@ -177,7 +192,7 @@ def newOperator(request):
             form = OperatorForm(request.POST)
             # print(form)
             if form.is_valid():
-                form = form.save()              
+                form = form.save()          
                 form2 = Operatorformset(request.POST, instance=form)
                 if form2.is_valid:
                    form2.save()
@@ -195,6 +210,9 @@ def newOperator(request):
     html_template = loader.get_template( 'accounts/newOperator.html')
     return HttpResponse(html_template.render(context, request))
 
+
+
+@login_required(login_url="/login/")
 def updateOperator(request, pk):
     user = User.objects.get(pk=pk)
     form= OperatorForm(instance= user)
@@ -217,6 +235,9 @@ def updateOperator(request, pk):
     html_template = loader.get_template( 'accounts/updateOperator.html')
     return HttpResponse(html_template.render(context, request))
 
+
+
+@login_required(login_url="/login/")
 def createPlans(request):
     try: 
         if request.method == 'GET':
@@ -235,6 +256,8 @@ def createPlans(request):
 
 # --------------------------------------Customer Views----------------------------------------------
 
+@login_required(login_url="/loginCustomer/")
+@allowed_users(allowed_roles=['Customer'])
 def customerHome(request):
     cust = request.user
 
@@ -246,6 +269,9 @@ def customerHome(request):
     html_template = loader.get_template( 'accounts/customer_home.html')
     return HttpResponse(html_template.render(context, request))
 
+
+
+@login_required(login_url="/login/")
 def updateCustomer(request, id):
     user = User.objects.get(pk=id)
     form= CustomerForm(instance= user)
@@ -270,13 +296,36 @@ def updateCustomer(request, id):
 
 
 def customerTickets(request):
-
-    context={}
+    user = Customer.objects.all()
+    try:
+        if request.method == 'POST':
+            name = request.POST.get('name')
+            email = request.POST.get('email')
+            mobile = request.POST.get('mobile')
+            city = request.POST.get('city')
+            message_box = request.POST.get('message_box')
+            sr_type = request.POST.get('sr_type')
+            sub_type = request.POST.get('sub_type')
+            select1 = request.POST.get('select1')
+            check_stb = STB.objects.all().filter(serial_number=select1)
+            print(check_stb[0])
+            sr = ServiceRequest(name=name, email=email, mobile=mobile, city=city, sr_type=sr_type, sub_type=sub_type, stb=check_stb[0])
+            sr.save()
+            context = {'stb':stb, 'message' : 'Complaint created successfully' , 'class' : 'success' }
+            return render(request,'tickets.html' , context)
+        else:
+            print('Error')
+    except Exception as e:
+        print(e)
+    
+    context = {'user':user}
 
     html_template = loader.get_template( 'tickets.html')
     return HttpResponse(html_template.render(context, request))
 
 
+
+@login_required(login_url="/login/")
 def addEmployees(request):
     form= EmployeeForm()
     try:
@@ -284,8 +333,10 @@ def addEmployees(request):
             form = EmployeeForm(request.POST)
             if form.is_valid():
                 form.save()
-                messages.success(request, 'Account is created')
-
+                # group = Group.objects.get(name='Employee')
+                # groups.add(group)
+                return redirect('employees')
+                print('working')
             else:
                 print('Form is not valid')
     except Exception as e:
@@ -296,6 +347,9 @@ def addEmployees(request):
     html_template = loader.get_template( 'addEmployee.html')
     return HttpResponse(html_template.render(context, request))
 
+
+
+@login_required(login_url="/login/")
 def employees(request):
     users = Employee.objects.all()
     print(users)
@@ -303,12 +357,18 @@ def employees(request):
     html_template = loader.get_template( 'employees.html' )
     return HttpResponse(html_template.render(context, request))
 
+
+
+@login_required(login_url="/login/")
 def payments(request):
     
     context = {}
     html_template = loader.get_template( 'payment.html' )
     return HttpResponse(html_template.render(context, request))
 
+
+
+@login_required(login_url="/login/")
 def serviceRequests(request):
     sr = ServiceRequest.objects.all()
     
@@ -344,12 +404,18 @@ def addserviceRequests(request):
     html_template = loader.get_template( 'newServiceRequest.html' )
     return HttpResponse(html_template.render(context, request))
 
+
+
+@login_required(login_url="/login/")
 def stb(request):
     
     context = {}
     html_template = loader.get_template( 'stb.html' )
     return HttpResponse(html_template.render(context, request))
 
+
+
+@login_required(login_url="/login/")
 def addstb(request):
     form= stbForm()
     try:
